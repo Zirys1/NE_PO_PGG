@@ -1,0 +1,12 @@
+name: ne_po_pgg
+title: ne_po_pgg
+username:
+account: zirys
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 567810
+bundleId: 1698127
+url: https://zirys.shinyapps.io/ne_po_pgg/
+when: 1542108786.52917
+asMultiple: FALSE
+asStatic: FALSE
