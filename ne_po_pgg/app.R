@@ -34,6 +34,10 @@ ui <- fluidPage(
                   value = 4,
                   step = 1)
       ,
+      checkboxInput("y",
+                    "Choice menus slider?",
+                    value = TRUE)
+      ,
       textInput("g_i",
                 "Choice menu: Payment options to public good",
                 value = "300,250,200,150,100,50,0")
@@ -41,6 +45,13 @@ ui <- fluidPage(
       textInput("p_i",
                 "Choice menu: Payment options to private good",
                 value = "0,90,150,175,200,209,220") 
+      ,
+      sliderInput("cs",
+                  "Private choice sets",
+                  min = 1,
+                  max = 6,
+                  value = 1,
+                  step = 1)
     ),
     
     # Show a plot of the generated distribution
@@ -56,11 +67,41 @@ ui <- fluidPage(
 server <- function(input, output) {
   
   output$Plot <- renderPlot({
-    
-    p <- as.numeric(unlist(strsplit(input$p_i, ","))) #c(0,90,150,175,200,209,220)
-    g <- as.numeric(unlist(strsplit(input$g_i, ","))) # c(300,250,200,150,100,50,0)  #as.numeric(unlist(strsplit(input$vec1,",")))
+
+    p1 <- as.numeric(unlist(strsplit(input$p_i, ","))) 
+    g1 <- as.numeric(unlist(strsplit(input$g_i, ","))) 
+    if(input$y == TRUE){   
+    if(input$cs == 1){    
+    p <- as.numeric(c(0,110,250,300,350,370,380)) 
+    g <- as.numeric(c(600,500,400,300,200,100,0)) 
+    }
+    if(input$cs == 2){    
+      p <- as.numeric(c(0,120,260,310,360,380,390)) 
+      g <- as.numeric(c(600,500,400,300,200,100,0)) 
+    }
+    if(input$cs == 3){    
+      p <- as.numeric(c(0,130,270,320,370,390,400)) 
+      g <- as.numeric(c(600,500,400,300,200,100,0)) 
+    }
+    if(input$cs == 4){    
+      p <- as.numeric(c(0,140,280,330,380,400,410)) 
+      g <- as.numeric(c(600,500,400,300,200,100,0)) 
+    }
+    if(input$cs == 5){    
+      p <- as.numeric(c(0,150,290,340,390,410,420)) 
+      g <- as.numeric(c(600,500,400,300,200,100,0)) 
+    }
+    if(input$cs == 6){    
+      p <- as.numeric(c(0,160,300,350,400,420,430)) 
+      g <- as.numeric(c(600,500,400,300,200,100,0)) 
+    }
+  }
     n <- input$n 
     k <- input$k
+    if(input$y == FALSE){
+      p <- p1
+      g <- g1
+    }
     seq <- c(1:length(p))
     cum <- p + g*n/k # PO
     diffG <- (g[seq] - g[seq+1])/k 
@@ -92,8 +133,34 @@ server <- function(input, output) {
   
   
   output$table <- renderTable({
-    p <- as.numeric(unlist(strsplit(input$p_i, ","))) #c(0,90,150,175,200,209,220)
-    g <- as.numeric(unlist(strsplit(input$g_i, ","))) # c(300,250,200,150,100,50,0)  #as.numeric(unlist(strsplit(input$vec1,",")))
+    p1 <- as.numeric(unlist(strsplit(input$p_i, ","))) 
+    g1 <- as.numeric(unlist(strsplit(input$g_i, ","))) 
+    if(input$y == TRUE){   
+      if(input$cs == 1){    
+        p <- as.numeric(c(0,110,250,300,350,370,380)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 2){    
+        p <- as.numeric(c(0,120,260,310,360,380,390)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 3){    
+        p <- as.numeric(c(0,130,270,320,370,390,400)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 4){    
+        p <- as.numeric(c(0,140,280,330,380,400,410)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 5){    
+        p <- as.numeric(c(0,150,290,340,390,410,420)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 6){    
+        p <- as.numeric(c(0,160,300,350,400,420,430)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+    }
     n <- input$n 
     k <- input$k
     seq <- c(1:length(p))
@@ -111,8 +178,34 @@ server <- function(input, output) {
   
   
   output$table2 <- renderTable({
-    p <- as.numeric(unlist(strsplit(input$p_i, ","))) #c(0,90,150,175,200,209,220)
-    g <- as.numeric(unlist(strsplit(input$g_i, ","))) # c(300,250,200,150,100,50,0)  #as.numeric(unlist(strsplit(input$vec1,",")))
+    p1 <- as.numeric(unlist(strsplit(input$p_i, ","))) 
+    g1 <- as.numeric(unlist(strsplit(input$g_i, ","))) 
+    if(input$y == TRUE){   
+      if(input$cs == 1){    
+        p <- as.numeric(c(0,110,250,300,350,370,380)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 2){    
+        p <- as.numeric(c(0,120,260,310,360,380,390)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 3){    
+        p <- as.numeric(c(0,130,270,320,370,390,400)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 4){    
+        p <- as.numeric(c(0,140,280,330,380,400,410)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 5){    
+        p <- as.numeric(c(0,150,290,340,390,410,420)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+      if(input$cs == 6){    
+        p <- as.numeric(c(0,160,300,350,400,420,430)) 
+        g <- as.numeric(c(600,500,400,300,200,100,0)) 
+      }
+    }
     n <- input$n 
     k <- input$k
     seq <- c(1:length(p))
