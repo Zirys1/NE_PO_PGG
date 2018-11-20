@@ -36,7 +36,7 @@ ui <- fluidPage(
       ,
       checkboxInput("y",
                     "Choice menus slider?",
-                    value = TRUE)
+                    value = FALSE)
       ,
       textInput("g_i",
                 "Choice menu: Payment options to public good",
@@ -163,6 +163,10 @@ server <- function(input, output) {
     }
     n <- input$n 
     k <- input$k
+    if(input$y == FALSE){
+      p <- p1
+      g <- g1
+    }
     seq <- c(1:length(p))
     p_plus_g <- p + g*n/k # PO
 #    diffG <- (g[seq] - g[seq+1])/k
@@ -208,6 +212,10 @@ server <- function(input, output) {
     }
     n <- input$n 
     k <- input$k
+    if(input$y == FALSE){
+      p <- p1
+      g <- g1
+    }
     seq <- c(1:length(p))
     p_plus_g <- p + g*n/k # PO
     diffG <- (g[seq] - g[seq+1])/k 
